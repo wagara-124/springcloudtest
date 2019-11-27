@@ -7,3 +7,4 @@ eureka:
   client:
     service-url:
       defaultZone: http://cyclic.top:8000/eureka/
+feign.hystrix.enabled: true
