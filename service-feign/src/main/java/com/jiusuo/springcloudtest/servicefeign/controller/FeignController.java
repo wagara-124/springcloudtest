@@ -2,6 +2,7 @@ package com.jiusuo.springcloudtest.servicefeign.controller;
 
 import com.jiusuo.springcloudtest.servicefeign.service.FeignService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,8 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/test")
 public class FeignController {
 
-    @Autowired
-    private FeignService feignService;
+    private final FeignService feignService;
+
+    public FeignController(@Qualifier("feignServiceImpl") FeignService feignService) {
+        this.feignService = feignService;
+    }
 
     @RequestMapping(value = "helloFeign")
     public String helloFeign(@RequestParam(value = "name", defaultValue = "Feign") String name) {
